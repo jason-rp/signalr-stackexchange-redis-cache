@@ -3,3 +3,6 @@
 ################################################################################
 
 /signalr-redis/SignalR.Server/bin
+/signalr-redis/packages
+/signalr-redis/.vs
+/signalr-redis/SignalR.Server/obj/Debug
