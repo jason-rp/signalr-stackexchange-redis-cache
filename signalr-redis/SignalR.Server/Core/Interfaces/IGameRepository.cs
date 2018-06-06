@@ -8,6 +8,6 @@ namespace SignalR.Server.Core.Interfaces
 {
     public interface IGameRepository
     {
-        void Add(string name, string message);
+        string Add(string name, string message);
     }
 }

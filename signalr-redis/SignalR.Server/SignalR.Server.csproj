@@ -105,6 +105,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="SignalR.Sample\jquery-1.10.2.min.js" />
+    <Content Include="SignalR.Sample\jquery-1.10.2.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -119,6 +121,10 @@
     <Content Include="Scripts\jquery-1.6.4.min.js" />
     <Content Include="Scripts\jquery.signalR-2.2.3.js" />
     <Content Include="Scripts\jquery.signalR-2.2.3.min.js" />
+    <Content Include="SignalR.Sample\jquery.color-2.1.2.min.js" />
+    <Content Include="SignalR.Sample\SignalR.StockTicker.js" />
+    <Content Include="SignalR.Sample\StockTicker.css" />
+    <Content Include="SignalR.Sample\StockTicker.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -126,8 +132,14 @@
     <Compile Include="Core\RedisConnectorHelper.cs" />
     <Compile Include="Core\MessageWatcherMiddeware.cs" />
     <Compile Include="Core\Repositories\GameRepository.cs" />
+    <Compile Include="Core\Test.cs" />
     <Compile Include="GameHub.cs" />
+    <Compile Include="LivePoolHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SignalR.Sample\Startup.cs" />
+    <Compile Include="SignalR.Sample\Stock.cs" />
+    <Compile Include="SignalR.Sample\StockTicker.cs" />
+    <Compile Include="SignalR.Sample\StockTickerHub.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

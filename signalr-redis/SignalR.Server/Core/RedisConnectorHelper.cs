@@ -10,9 +10,10 @@ namespace SignalR.Server.Core
     {
         static RedisConnectorHelper()
         {
+
             RedisConnectorHelper.lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
             {
-                return ConnectionMultiplexer.Connect("localhost");
+                return ConnectionMultiplexer.Connect("localhost:6379");
             });
         }
 

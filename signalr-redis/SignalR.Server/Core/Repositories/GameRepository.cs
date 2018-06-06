@@ -1,4 +1,5 @@
-﻿using SignalR.Server.Core.Interfaces;
+﻿using Newtonsoft.Json;
+using SignalR.Server.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,20 @@ namespace SignalR.Server.Core.Repositories
 {
     public class GameRepository : IGameRepository
     {
-        public void Add(string name, string message)
+        public string Add(string name, string message)
         {
-           //send to redis
+            var result = string.Empty;
+            RedisConnectorHelper.Connection.GetSubscriber().Subscribe("RPChanel", (chanel, value) =>
+            {
+                result = JsonConvert.DeserializeObject<DataReturn>(value).Data;
+            });
+            //send to redis
+
+            return result;
         }
+    }
+
+    public class DataReturn {
+        public string Data { get; set; }
     }
 }
