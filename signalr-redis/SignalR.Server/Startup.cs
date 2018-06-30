@@ -9,7 +9,6 @@ using Microsoft.AspNet.SignalR.Infrastructure;
 using Owin;
 using SignalR.Server.Core;
 using SignalR.Server.Core.Interfaces;
-using SignalR.Server.Core.Repositories;
 
 namespace SignalR.Server
 {
@@ -17,24 +16,31 @@ namespace SignalR.Server
     {
         public void Configuration(IAppBuilder app)
         {
-            GlobalHost.DependencyResolver.Register(
-    typeof(GameHub),
-    () => new GameHub());
-            var t = new Test();
-            t.Start();
-            //var builder = new ContainerBuilder();
 
-            //builder.RegisterType<GameHub>().ExternallyOwned();
-            //builder.RegisterType<LivePoolHub>().ExternallyOwned();
-            //builder.RegisterType<GameRepository>().As<IGameRepository>();
-            //var container = builder.Build();
-            //var config = new HubConfiguration();
-            //config.Resolver = new AutofacDependencyResolver(container);
+            HubConfiguration hubConfig = new HubConfiguration();
+            var builder = new ContainerBuilder();
+            
+            builder.RegisterType<GameHub>().ExternallyOwned();
 
-            //app.UseAutofacMiddleware(container);
-            //app.MapSignalR(config);
+            
 
-            app.MapSignalR();
+            builder.RegisterInstance(hubConfig);
+
+            //builder.RegisterGeneric(typeof(HubContextProvider<>)).As(typeof(IHubContextProvider<>)).SingleInstance();
+            builder.RegisterType<MessageWatcher>().As<IStartable>().SingleInstance();
+
+
+
+
+
+            var container = builder.Build();
+
+
+            var signalRResolver = new AutofacDependencyResolver(container);
+            hubConfig.Resolver = signalRResolver;
+
+            app.UseAutofacMiddleware(container);
+            app.MapSignalR(hubConfig);
         }
     }
 }

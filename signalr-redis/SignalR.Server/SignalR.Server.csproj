@@ -122,18 +122,18 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Interfaces\IGameRepository.cs" />
+    <Compile Include="Core\HubContextProvider.cs" />
+    <Compile Include="Core\Interfaces\IGameHub.cs" />
+    <Compile Include="Core\Interfaces\IHubContextProvider.cs" />
+    <Compile Include="Core\MessageWatcher.cs" />
     <Compile Include="Core\RedisConnectorHelper.cs" />
-    <Compile Include="Core\MessageWatcherMiddeware.cs" />
-    <Compile Include="Core\Repositories\GameRepository.cs" />
-    <Compile Include="Core\Test.cs" />
     <Compile Include="GameHub.cs" />
-    <Compile Include="LivePoolHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\Models\" />
+    <Folder Include="Core\Repositories\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
