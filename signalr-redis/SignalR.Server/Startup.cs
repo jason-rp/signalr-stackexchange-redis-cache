@@ -16,29 +16,9 @@ namespace SignalR.Server
     {
         public void Configuration(IAppBuilder app)
         {
-
-            HubConfiguration hubConfig = new HubConfiguration();
-            var builder = new ContainerBuilder();
-            
-            builder.RegisterType<GameHub>().ExternallyOwned();
-
-            
-
-            builder.RegisterInstance(hubConfig);
-
-            //builder.RegisterGeneric(typeof(HubContextProvider<>)).As(typeof(IHubContextProvider<>)).SingleInstance();
-            builder.RegisterType<MessageWatcher>().As<IStartable>().SingleInstance();
-
-
-
-
-
-            var container = builder.Build();
-
-
-            var signalRResolver = new AutofacDependencyResolver(container);
-            hubConfig.Resolver = signalRResolver;
-
+            var hubConfig = new HubConfiguration();
+            var container = new AutofacContainer(hubConfig).Container;
+            hubConfig.Resolver = new AutofacDependencyResolver(container);
             app.UseAutofacMiddleware(container);
             app.MapSignalR(hubConfig);
         }

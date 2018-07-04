@@ -11,16 +11,16 @@ namespace SignalR.Server.Core
     public class HubContextProvider<THubClient> : IHubContextProvider<THubClient>
         where THubClient : class
     {
-        private readonly IConnectionManager connectionManager;
+        private readonly IConnectionManager _connectionManager;
         public HubContextProvider(HubConfiguration hubConfiguration)
         {
-            this.connectionManager = hubConfiguration.Resolver.Resolve<IConnectionManager>();
+            this._connectionManager = hubConfiguration.Resolver.Resolve<IConnectionManager>();
         }
 
         public IHubContext<THubClient> GetHubContext<THub>()
             where THub : Hub<THubClient>
         {
-            return this.connectionManager.GetHubContext<THub, THubClient>();
+            return this._connectionManager.GetHubContext<THub, THubClient>();
         }
     }
 }
